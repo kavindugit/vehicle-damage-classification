@@ -14,6 +14,7 @@ import streamlit as st
 from model_helper import predict
 from PIL import Image
 import tempfile
+import io
 
 st.title("Vehicle Damage Detection")
 
@@ -23,15 +24,14 @@ uploaded_file = st.file_uploader(
 )
 
 if uploaded_file is not None:
-    # Display image safely
-    image = Image.open(uploaded_file)
+    image_bytes = uploaded_file.read()
+    image = Image.open(io.BytesIO(image_bytes))
     st.image(image, caption="Uploaded Image", use_container_width=True)
 
-    # Create a temporary file (cloud-safe)
     with tempfile.NamedTemporaryFile(delete=False, suffix=".jpg") as tmp:
-        tmp.write(uploaded_file.getbuffer())
+        tmp.write(image_bytes)
         temp_path = tmp.name
 
-    # Prediction
     prediction = predict(temp_path)
     st.info(f"Predicted class: {prediction}")
+
