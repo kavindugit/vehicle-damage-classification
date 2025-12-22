@@ -44,8 +44,10 @@ def predict(image_path):
 
     if trained_model is None:
         trained_model = CarClassifierRestNet(num_classes=6)
+        MODEL_PATH = os.path.join(BASE_DIR, "model", "saved_model.pth")
+
         trained_model.load_state_dict(
-            torch.load("model/saved_model.pth", map_location=device)
+            torch.load(MODEL_PATH, map_location=device)
         )
         trained_model.to(device)
         trained_model.eval()
