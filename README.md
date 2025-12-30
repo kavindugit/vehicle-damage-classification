@@ -103,19 +103,6 @@ Each Optuna trial:
 - Transfer learning reduces training time significantly
 - Hyperparameter tuning improves generalization
 
----
 
-## Technologies Used
 
-- Python
-- PyTorch
-- Torchvision
-- NumPy
-- Optuna
 
----
-
-## Author
-
-Kavindu Herath
-Deep Learning & Computer Vision
